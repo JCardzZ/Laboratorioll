@@ -1,0 +1,235 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/fav.png" type="image/png">
+    <link rel="icon" href="images/fav.png" sizes="32x32" type="image/png">
+    <title>Laboratorio ll</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156253999-5"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <script>
+        
+    </script>
+    <script>
+     
+    </script>
+</head>
+<body>
+<div class="flex-wrapper">
+    <div id="header-wrapper" class="container-fluid">
+        <div class="row">
+            <div id="header" class="col py-3">
+                <img src="images/logo.png" class="mx-auto d-block" style="max-height: 60px; max-width:100%;"/>
+            </div>
+        </div>
+    </div>
+    
+    <div id="main-wrapper">
+        <div id="main" class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h1 class="text-center mt-5">Consulta quién de tu familia es el beneficiario del apoyo
+                        <br> económico para alimentación en la emergencia</h1>
+                    <h1 class="text-center mt-1"><span class="badge badge-success">COVID-19</span></h1>
+                    <div class="row mt-5">
+                        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                            <form id="dui-form" action="/index.php" method="post">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control light-grey" id="dui" name="dui" style="background-color: #f2f2f2;" placeholder="Ingresa tu número de DUI">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="submit">CONSULTAR</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="footer-wrapper">
+        <div id="bottom-wrapper" class="text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <p th:text="${nombre}">#</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="copyright-wrapper">
+            <div class="container">
+                <div class="row pt-3">
+                    <div class="col text-left">
+                        <p th:text="${dato}"></p>
+                    </div>
+                    <div class="col text-right">
+                        <p>
+                            <a target="_blank" href="https://presidencia.gob.sv/contactenos">Contáctanos</a>
+                            <a target="_blank" href="https://www.facebook.com/PresidenciaSV">Facebook</a>
+                            <a target="_blank" href="https://twitter.com/presidenciasv">Twitter</a>
+                            <a target="_blank" href="https://www.instagram.com/presidenciasv/">Instagram</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+
+        if ($("#formModal").hasClass("show")) {
+            $("#formModal").modal("show");
+        }
+
+        $(document).on("keyup change", "#dui", function (evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            $("#dui").val(duiFormat($("#dui").val()));
+        });
+
+        $(document).on("keyup change", "#new-dui", function (evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            $("#new-dui").val(duiFormat($("#new-dui").val()));
+        });
+
+        function duiFormat(input) {
+            input = input.replace(/\D/g, "");
+            input = input.substring(0, 10);
+            var size = input.length;
+            if (size == 0) {
+                input = input;
+            } else if (size <= 8) {
+                input = input;
+            } else if (size > 8) {
+                input = input.substring(0, 8) + "-" + input.substring(8, 9);
+            }
+            return input;
+        }
+
+        $(document).on("keyup change", "#phone", function (evt) {
+            $("#phone").val(phoneFormat($("#phone").val()));
+        });
+
+        function phoneFormat(input) {
+            input = input.replace("(", "");
+            input = input.replace("-", "");
+            input = input.replace(/\D/g, "");
+            input = input.substring(0, 8);
+            var size = input.length;
+
+            if (size == 0) {
+                input = input;
+            } else if (size > 0 && size <= 4) {
+                input = '(' + input;
+            } else if (size > 4 && size < 8) {
+                input = "(" + input.substring(0, 4) + "-" + input.substring(4, 8);
+            }
+            if (size >= 8) {
+                input = "(" + input.substring(0, 4) + "-" + input.substring(4, 8) + ")";
+            }
+            return input;
+        }
+
+        $("#contact-form").submit(function (e) {
+            var newDUI = $("#new-dui").val();
+            var nis = $("#nis").val();
+            var phone = $("#phone").val();
+            var msg = $("#msg").val();
+            var empresa = $("#empresa").val();
+            var captcha = grecaptcha.getResponse();
+            var duiReg = /([0-9]{8,8}-[0-9])/;
+
+            var chk1 = false;
+            var chk2 = false;
+            var chk3 = false;
+            var chk4 = false;
+            var chk5 = false;
+            var chk6 = false;
+
+            if (duiReg.test(newDUI)) {
+                $("#new-dui").removeClass("is-invalid").addClass("is-valid");
+                chk1 = true;
+            } else {
+                $("#new-dui").removeClass("is-valid").addClass("is-invalid");
+                chk1 = false;
+            }
+
+            if (phone.length == 11) {
+                $("#phone").removeClass("is-invalid").addClass("is-valid");
+                chk2 = true;
+            } else {
+                $("#phone").removeClass("is-valid").addClass("is-invalid");
+                chk2 = false;
+            }
+
+            if (msg.length) {
+                $("#msg").removeClass("is-invalid").addClass("is-valid");
+                chk3 = true;
+            } else {
+                $("#msg").removeClass("is-valid").addClass("is-invalid");
+                chk3 = false;
+            }
+
+            if (empresa.length) {
+                $("#empresa").removeClass("is-invalid").addClass("is-valid");
+                chk4 = true;
+            } else {
+                $("#empresa").removeClass("is-valid").addClass("is-invalid");
+                chk4 = false;
+            }
+
+            if (captcha.length) {
+                $("#captcha").hide();
+                chk6 = true;
+            } else {
+                $("#captcha").show();
+                chk6 = false;
+            }
+
+            if (empresa == "notengo" || empresa == "otras") {
+                $("#nis").removeClass("is-invalid");
+                chk5 = true;
+            } else {
+                if (nis.length) {
+                    $("#nis").removeClass("is-invalid").addClass("is-valid");
+                    chk5 = true;
+                } else {
+                    $("#nis").removeClass("is-valid").addClass("is-invalid");
+                    chk5 = false;
+                }
+            }
+
+            if (chk1 && chk2 && chk3 && chk4 && chk5 && chk6) {
+                return true;
+            } else {
+                return false;
+            }
+
+        });
+
+        $("#dui-form").submit(function (e) {
+            var newDUI = $("#dui").val();
+            var duiReg = /([0-9]{8,8}-[0-9])/;
+
+            if (duiReg.test(newDUI)) {
+                return true;
+            } else {
+                $("#dui").addClass("is-invalid");
+                return false;
+            }
+
+        });
+
+    });
+</script>
+</body>
+</html>

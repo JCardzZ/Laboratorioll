@@ -1,0 +1,116 @@
+:root {
+    --dark-blue: #313E48;
+    --light-blue: #B2C2CF;
+    --teal: #19A28C;
+    --light-gray: #f2f2f2;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+}
+#sent-message {
+    background-color: var(--teal);
+}
+#header-wrapper {
+    background-color: var(--dark-blue);
+}
+#main-wrapper {
+    background-color: #fff;
+}
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between
+  }
+#main {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+h1{
+    font-size:1.5rem;
+}
+h2{
+    font-size: 1.5rem;
+    font-weight:bold;
+}
+.badge {
+    font-size:2rem;
+    border-radius: 18px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.btn {
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.form-control {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.badge-success,
+.btn-success {
+    background-color: var(--teal);
+}
+.btn-info {
+    background-color: var(--light-blue);
+    border-color: var(--light-blue);
+}
+.btn-action{
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    color: var(--teal);
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-right:25px;
+    padding-left: 25px;
+    font-weight: bold;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.3);
+    font-size: 14px;
+}
+#bottom-wrapper {
+    background-color: var(--light-gray);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+#copyright-wrapper {
+    background-color: var(--light-blue);
+}
+
+#copyright-wrapper{
+    color: #fff;
+}
+#copyright-wrapper a{
+    color: #fff;
+    cursor: pointer;
+}
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+#accepted {
+    width:100%;
+}
+#accepted img{
+    width:100%;
+    max-width:150px;
+}
+.grey{
+    background-color: #e6e6e6;
+}
+.smallscript{
+    font-size:70%;
+    margin-bottom: 5px;
+}
+.teal-text{
+    color:#19A28C;
+}
+#g-recaptcha > div {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
